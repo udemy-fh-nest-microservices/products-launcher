@@ -3,6 +3,10 @@
 ## Development Environment
 
 1. Clonar el repo.
+2. Obtener los submodulos con el comando
+```bash
+git submodule update --init --recursive
+```
 2. Levantar con Docker compose
 ```bash
 docker compose up --build
