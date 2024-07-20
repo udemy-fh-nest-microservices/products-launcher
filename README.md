@@ -7,7 +7,7 @@
 ```bash
 git submodule update --init --recursive
 ```
-2. Levantar con Docker compose
+3. Levantar con Docker compose
 ```bash
 docker compose up --build
 ```
