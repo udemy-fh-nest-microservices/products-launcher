@@ -10,3 +10,6 @@
 [submodule "payments-ms"]
 	path = payments-ms
 	url = git@github.com:udemy-fh-nest-microservices/payments-ms.git
+[submodule "auth-ms"]
+	path = auth-ms
+	url = git@github.com:udemy-fh-nest-microservices/auth-ms.git
