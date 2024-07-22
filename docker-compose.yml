@@ -25,7 +25,7 @@ services:
       - orders-service
     build: ./client-gateway
     ports:
-      - 3000:3000
+      - 3001:3000
     volumes:
       - ./client-gateway/src:/app/src
     command: npm run start:dev
@@ -56,3 +56,18 @@ services:
       - PORT=3002
       - NATS_SERVERS=nats://nats-server:4222
       - DATABASE_URL=postgresql://postgres:postgres@orders-db:5432/orders?schema=public
+
+  payments-service:
+    build: ./payments-ms
+    volumes:
+      - ./payments-ms/src:/app/src
+    ports:
+      - 3000:3000
+    command: npm run start:dev
+    environment:
+      - PORT=${PAYMENTS_PORT}
+      - NATS_SERVERS=nats://nats-server:4222
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
+      - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
+      - STRIPE_ENDPOINT_SECRET=${STRIPE_ENDPOINT_SECRET}
