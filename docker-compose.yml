@@ -8,7 +8,6 @@ services:
 
   orders-db:
     image: postgres
-    restart: always
     volumes:
       - ./orders-ms/postgres_data:/var/lib/postgresql/data
     ports:
@@ -17,6 +16,19 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=orders
+
+  auth-service:
+    depends_on:
+      - nats-server
+    build: ./auth-ms
+    volumes:
+      - ./auth-ms/src:/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3000
+      - NATS_SERVERS=nats://nats-server:4222
+      - DATABASE_URL=${AUTH_DATABASE_URL}
+      - JWT_SECRET=${AUTH_JWT_SECRET}
 
   client-gateway:
     depends_on:
